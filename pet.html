@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Adoption</title>
+    <title>Pet Adoption (Connected to Backend)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+       
         :root {
             --primary-color: #4CAF50;
             --primary-dark: #45a049;
@@ -18,7 +19,6 @@
             --border-radius: 8px;
             --spacing: 20px;
         }
-
         [data-theme="dark"] {
             --primary-color: #66bb6a;
             --primary-dark: #4caf50;
@@ -26,414 +26,203 @@
             --bg-color: #1a1a1a;
             --card-bg: #2d2d2d;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .navbar {
-            background-color: var(--card-bg);
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem var(--spacing);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 120px var(--spacing) 60px;
-            text-align: center;
-        }
-
-        .header-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .header-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 var(--spacing);
-        }
-
-        .form-section {
-            background-color: var(--card-bg);
-            padding: var(--spacing);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: var(--border-radius);
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            transition: var(--transition);
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-        }
-
-        .submit-btn {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .masonry-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            list-style: none;
-        }
-
-        .pet-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .pet-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .pet-image {
-            position: relative;
-            height: 200px;
-        }
-
-        .pet-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .pet-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        .pet-info {
-            padding: var(--spacing);
-        }
-
-        .pet-details {
-            display: flex;
-            gap: 15px;
-            margin: 10px 0;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        footer {
-            background-color: var(--card-bg);
-            padding: 40px var(--spacing);
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            font-size: 1.5rem;
-        }
-
-        .social-links a {
-            color: var(--text-color);
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            color: var(--primary-color);
-        }
-
-        @media (max-width: 768px) {
-            .header-content h1 {
-                font-size: 2rem;
-            }
-            .section-header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .filters {
-                flex-direction: column;
-            }
-            .footer-content {
-                text-align: center;
-            }
-            .social-links {
-                justify-content: center;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body 
+    { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        .navbar 
+    { background-color: var(--card-bg); box-shadow: var(--shadow); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .nav-content 
+    { max-width: 1200px; margin: 0 auto; padding: 1rem var(--spacing); display: flex; justify-content: space-between; align-items: center; }
+        .logo
+     { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
+        header
+     { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 120px var(--spacing) 60px; text-align: center; }
+        .header-content h1
+     { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
+        main 
+    { max-width: 1200px; margin: 40px auto; padding: 0 var(--spacing); }
+        .form-section, .pet-card
+     { background-color: var(--card-bg); padding: var(--spacing); border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 40px; }
+        .form-group
+     { margin-bottom: 20px; }
+        .form-row
+     { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        label
+     { display: block; margin-bottom: 8px; font-weight: 500; }
+        input, select, textarea
+     { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: var(--border-radius); background-color: var(--card-bg); color: var(--text-color); transition: var(--transition); }
+        input:focus, select:focus, textarea:focus
+     { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); }
+        .submit-btn 
+    { background-color: var(--primary-color); color: white; padding: 12px 24px; border: none; border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 500; }
+        .submit-btn:hover 
+    { background-color: var(--primary-dark); transform: translateY(-2px); }
+        .masonry-grid 
+    { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; list-style: none; }
+        .pet-card 
+    { margin-bottom: 0; overflow: hidden; transition: var(--transition); }
+        .pet-card:hover
+     { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); }
+        .pet-image 
+    { position: relative; height: 200px; }
+        .pet-image img
+     { width: 100%; height: 100%; object-fit: cover; }
+        .pet-badge
+     { position: absolute; top: 10px; right: 10px; background-color: var(--primary-color); color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; }
+        .pet-info 
+    { padding: var(--spacing); }
+        .pet-details 
+    { display: flex; gap: 15px; margin: 10px 0; font-size: 0.9rem; color: #666; }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <div class="logo">
-                <i class="fas fa-paw"></i>
-                <span>Pet Adoption</span>
-            </div>
+            <button id="theme-toggle" class="submit-btn" style="padding: 8px 12px;"><i class="fas fa-moon"></i></button>
+            <div class="logo"><i class="fas fa-paw"></i><span>Pet Adoption</span></div>
         </div>
     </nav>
-
     <header>
         <div class="header-content">
             <h1>Find Your Perfect Companion</h1>
             <p class="subtitle">Give a loving home to pets in need</p>
         </div>
     </header>
-
     <main>
         <section class="form-section">
             <h2><i class="fas fa-plus-circle"></i> Add a New Pet</h2>
             <form id="pet-form">
-                <div class="form-group">
-                    <label for="name">Pet Name</label>
-                    <input type="text" id="name" required placeholder="Enter pet's name">
-                </div>
-
-                <div class="form-group">
-                    <label for="type">Pet Type</label>
-                    <select id="type" required>
-                        <option value="">Select pet type</option>
-                        <option value="dog">Dog</option>
-                        <option value="cat">Cat</option>
-                        <option value="bird">Bird</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
+                <div class="form-group"><label for="name">Pet Name</label><input type="text" id="name" required placeholder="Enter pet's name"></div>
+                <div class="form-group"><label for="type">Pet Type</label><select id="type" required><option value="">Select pet type</option><option value="dog">Dog</option><option value="cat">Cat</option><option value="bird">Bird</option><option value="other">Other</option></select></div>
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="age">Age</label>
-                        <input type="number" id="age" required min="0" placeholder="Age in years">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="gender">Gender</label>
-                        <select id="gender" required>
-                            <option value="">Select gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
+                    <div class="form-group"><label for="age">Age</label><input type="number" id="age" required min="0" placeholder="Age in years"></div>
+                    <div class="form-group"><label for="gender">Gender</label><select id="gender" required><option value="">Select gender</option><option value="male">Male</option><option value="female">Female</option></select></div>
                 </div>
-
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" required placeholder="Tell us about the pet..."></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <span>Add Pet</span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+                <div class="form-group"><label for="description">Description</label><textarea id="description" required placeholder="Tell us about the pet..."></textarea></div>
+                <div class="form-group"><label for="imageUrl">Image URL (Optional)</label><input type="url" id="imageUrl" placeholder="https://example.com/image.jpg"></div>
+                <button type="submit" class="submit-btn"><span>Add Pet</span><i class="fas fa-arrow-right"></i></button>
             </form>
         </section>
-
         <section class="pet-list-section">
             <h2><i class="fas fa-heart"></i> Available Pets</h2>
             <ul class="masonry-grid" id="pet-list"></ul>
         </section>
     </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-envelope"></i> murthyandsai@gmail.com</p>
-                <p><i class="fas fa-phone"></i> 9346094541,9121794105</p>
-            </div>
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/murthy_102/"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <p>&copy; 2025 Pet Adoption Platform</p>
-                <p>Made with <i class="fas fa-heart"></i> for pets</p>
-            </div>
-        </div>
-    </footer>
-
+    
     <script>
+        
         const petForm = document.getElementById('pet-form');
         const petList = document.getElementById('pet-list');
+        const themeToggle = document.getElementById('theme-toggle');
+        const API_URL = 'http://localhost:3000/api/pets';
 
-        // Map pet types to corresponding images
+        
         const petImages = {
             dog: "https://placedog.net/300/200",
-    cat: "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg", // Updated cat image
-    bird: "data:image/jpeg;base64,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", // Updated bird image
-    other: "https://media.istockphoto.com/id/1296353202/photo/group-of-pets-posing-around-a-border-collie-dog-cat-ferret-rabbit-bird-fish-rodent.jpg?s=612x612&w=0&k=20&c=l4UJze9hXcNABS_3QJcaOU07R1pcuV3L7w_IJTu9o2c="
+            cat: "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg",
+            bird: "https://images.pexels.com/photos/1661179/pexels-photo-1661179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            other: "https://media.istockphoto.com/id/1296353202/photo/group-of-pets-posing-around-a-border-collie-dog-cat-ferret-rabbit-bird-fish-rodent.jpg?s=612x612&w=0&k=20&c=l4UJze9hXcNABS_3QJcaOU07R1pcuV3L7w_IJTu9o2c="
         };
 
-        // Function to display pets from localStorage
-        const displayPets = () => {
-            const pets = JSON.parse(localStorage.getItem('pets')) || [];
-            petList.innerHTML = '';
-            if (pets.length === 0) {
-                petList.innerHTML = '<p>No pets available.</p>';
-            } else {
-                pets.forEach((pet, index) => {
-                    const petCard = document.createElement('li');
-                    petCard.classList.add('pet-card');
+       
+        const displayPets = async () => {
+            try {
+                
+                const response = await fetch(API_URL);
+                const pets = await response.json();
+                
+                petList.innerHTML = ''; 
 
-                    // Get the correct image URL based on pet type
-                    const petImage = petImages[pet.type] || petImages["other"];
+                if (pets.length === 0) {
+                    petList.innerHTML = '<p style="text-align: center;">No pets available for adoption yet!</p>';
+                } else {
+                    pets.forEach(pet => {
+                        const petCard = document.createElement('li');
+                        petCard.classList.add('pet-card');
+                        const petImageSrc = pet.imageUrl || petImages[pet.type] || petImages["other"];
 
-                    petCard.innerHTML = `
-                        <div class="pet-image">
-                            <img src="${petImage}" alt="${pet.type}">
-                            <span class="pet-badge">Available</span>
-                        </div>
-                        <div class="pet-info">
-                            <h3>${pet.name}</h3>
-                            <div class="pet-details">
-                                <span><i class="fas fa-paw"></i> ${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</span>
-                                <span><i class="fas fa-birthday-cake"></i> ${pet.age} years</span>
-                                <span><i class="fas fa-venus-mars"></i> ${pet.gender.charAt(0).toUpperCase() + pet.gender.slice(1)}</span>
+                        petCard.innerHTML = `
+                            <div class="pet-image">
+                                <img src="${petImageSrc}" alt="${pet.name}">
+                                <span class="pet-badge">Available</span>
                             </div>
-                            <p class="pet-description">${pet.description}</p>
-                            <button class="submit-btn" onclick="adoptPet(${index})">Adopt Now</button>
-                        </div>
-                    `;
-                    petList.appendChild(petCard);
-                });
+                            <div class="pet-info">
+                                <h3>${pet.name}</h3>
+                                <div class="pet-details">
+                                    <span><i class="fas fa-paw"></i> ${pet.type}</span>
+                                    <span><i class="fas fa-birthday-cake"></i> ${pet.age} years</span>
+                                    <span><i class="fas fa-venus-mars"></i> ${pet.gender}</span>
+                                </div>
+                                <p>${pet.description}</p>
+                                <button class="submit-btn" onclick="adoptPet('${pet._id}')">Adopt Now</button>
+                            </div>
+                        `;
+                        petList.appendChild(petCard);
+                    });
+                }
+            } catch (error) {
+                console.error('Failed to fetch pets:', error);
+                petList.innerHTML = '<p style="text-align: center; color: red;">Could not load pets. Is the backend server running?</p>';
             }
         };
 
-        // Form submission event to add a new pet
-        petForm.addEventListener('submit', function (e) {
+        
+        petForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
             const newPet = {
                 name: document.getElementById('name').value,
                 type: document.getElementById('type').value,
                 age: document.getElementById('age').value,
                 gender: document.getElementById('gender').value,
-                description: document.getElementById('description').value
+                description: document.getElementById('description').value,
+                imageUrl: document.getElementById('imageUrl').value.trim()
             };
 
-            // Get existing pets from localStorage
-            const pets = JSON.parse(localStorage.getItem('pets')) || [];
-
-            // Add the new pet to the list
-            pets.push(newPet);
-
-            // Save the updated list to localStorage
-            localStorage.setItem('pets', JSON.stringify(pets));
-
-            // Reset the form and refresh the pet list
-            petForm.reset();
-            displayPets();
+            try {
+               
+                await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newPet)
+                });
+                
+                petForm.reset();
+                displayPets(); 
+            } catch (error) {
+                console.error('Failed to add pet:', error);
+            }
         });
 
-        // Function to adopt a pet and redirect to another website
-        const adoptPet = (index) => {
-            // Get pets from localStorage
-            const pets = JSON.parse(localStorage.getItem('pets')) || [];
-
-            // Remove the adopted pet
-            pets.splice(index, 1);
-
-            // Save the updated list back to localStorage
-            localStorage.setItem('pets', JSON.stringify(pets));
-
-            // Redirect to the adoption page or website
-            window.location.href = 'https://bobby93460.netlify.app/'; // Replace with the actual URL
+        
+        const adoptPet = async (petId) => {
+            if (confirm('Are you sure you want to adopt this pet?')) {
+                try {
+                    
+                    await fetch(`${API_URL}/${petId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    displayPets(); 
+                } catch (error) {
+                    console.error('Failed to adopt pet:', error);
+                }
+            }
         };
+        
+       
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
 
-        // Display pets when the page loads
+       
         displayPets();
     </script>
 </body>
